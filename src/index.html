@@ -13,7 +13,37 @@
 </head>
 
 <body>
-  <div class="application" />
+  <div id="application" />
+
+  <template id="product-template">
+    <div class="product elevation-1">
+      <div class="product__discount"></div>
+
+      <img class="product__image padding-1"></img>
+
+      <div class="h-padding-1 padding-b-1">
+        <div class="product__name"></div>
+
+        <div class="d-flex-r d-flex-a-c">
+          <div class="product__price--credit-card"></div>
+
+          <i class="material-icons margin-l-0">credit_card</i>
+        </div>
+        <div>
+          Internet: <span class="product__price--online"></span>
+        </div>
+        <div>
+          Normal: <span class="product__price--normal"></span>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="rating-template">
+    <div clas="rating">
+      <i class="material-icons star">star</i>
+    </div>
+  </template>
 </body>
 
 </html>
