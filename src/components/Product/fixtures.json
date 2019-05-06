@@ -4,7 +4,7 @@
     "image": "https://media.tracfone.com/wps/contenthandler/dav/content/libraries/wcm.library.phones/components/STSAS367VCP/wcm.comps.image/st_ecom_large_1.png",
     "name": "Nokia",
     "prices": {
-      "creditCard": "49.990",
+      "credit": "49.990",
       "online": "59.990",
       "normal": "79.990"
     }

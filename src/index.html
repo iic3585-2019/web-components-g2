@@ -16,27 +16,72 @@
   <div id="application" />
 
   <template id="product-template">
-    <div class="product elevation-1">
-      <div class="product__discount"></div>
+    <div class="component">
+      <div class="discount"></div>
 
-      <img class="product__image padding-1"></img>
+      <img class="image"></img>
 
-      <div class="h-padding-1 padding-b-1">
-        <div class="product__name"></div>
+      <div class="body">
+        <div class="name"></div>
 
-        <div class="d-flex-r d-flex-a-c">
-          <div class="product__price--credit-card"></div>
-
-          <i class="material-icons margin-l-0">credit_card</i>
-        </div>
-        <div>
-          Internet: <span class="product__price--online"></span>
-        </div>
-        <div>
-          Normal: <span class="product__price--normal"></span>
-        </div>
+        <div class="price price--credit"></div>
+        <div>Internet: <span class="price price--online"></span></div>
+        <div>Normal: <span class="price price--normal"></span></div>
       </div>
     </div>
+
+    <style>
+      .component {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+
+        font-family: 'Roboto', sans-serif;
+
+        border-radius: 2px;
+        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+      }
+
+      .discount {
+        align-self: flex-end;
+
+        display: inline-block;
+
+        font-size: 2rem;
+        font-weight: bold;
+        color: #FFFFFF;
+
+        padding: .5rem .75rem;
+
+        background-color: #F44336;
+        border-radius: 2px;
+      }
+
+      .image {
+        padding: 1rem;
+      }
+
+      .body {
+        padding-right: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 1rem;
+      }
+
+      .name {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      .price--credit {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #2196F3;
+      }
+
+      .price--normal {
+        text-decoration: line-through;
+      }
+    </style>
   </template>
 
   <template id="rating-template">
