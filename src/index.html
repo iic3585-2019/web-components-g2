@@ -13,20 +13,52 @@
 </head>
 
 <body>
-  <div id="application" />
+  <div id="application" class="padding-3">
+    <div class="d-flex-r d-flex-a-c d-flex-j-sa elevation-1">
+      <div class="component-container">
+        <!-- Product component -->
+        <app-product>
+          <div slot="discount">38%</div>
+
+          <img
+            src="https://media.tracfone.com/wps/contenthandler/dav/content/libraries/wcm.library.phones/components/STSAS367VCP/wcm.comps.image/st_ecom_large_1.png"
+            class="image" slot="image">
+
+          <div slot="name">Nokia</div>
+
+          <div slot="price-credit">49.990</div>
+          <div slot="price-online">59.990</div>
+          <div slot="price-normal">79.990</div>
+        </app-product>
+      </div>
+
+      <div class="v-separator"></div>
+
+      <div class="component-container">
+        <!-- Rating component -->
+        <app-rating current-value="3" max-value="5">
+          <i slot="star" class="material-icons">star</i>
+        </app-rating>
+      </div>
+    </div>
+  </div>
 
   <template id="product-template">
     <div class="component">
-      <div class="discount"></div>
+      <slot name="discount" class="discount"></slot>
 
-      <img class="image"></img>
+      <slot name="image" class="image"></slot>
 
       <div class="body">
-        <div class="name"></div>
+        <slot name="name" class="name"></slot>
 
-        <div class="price price--credit"></div>
-        <div>Internet: <span class="price price--online"></span></div>
-        <div>Normal: <span class="price price--normal"></span></div>
+        <slot name="price-credit" class="price price--credit"></slot>
+        <div>
+          Internet: <slot name="price-online" class="price price--online"></slot>
+        </div>
+        <div>
+          Normal: <slot name="price-normal" class="price price--normal"></slot>
+        </div>
       </div>
     </div>
 
@@ -39,7 +71,6 @@
         font-family: 'Roboto', sans-serif;
 
         border-radius: 2px;
-        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
       }
 
       .discount {
@@ -57,7 +88,7 @@
         border-radius: 2px;
       }
 
-      .image {
+      ::slotted(.image) {
         padding: 1rem;
       }
 
@@ -78,16 +109,36 @@
         color: #2196F3;
       }
 
+      .price--online {
+        display: inline-block;
+      }
+
       .price--normal {
+        display: inline-block;
+
         text-decoration: line-through;
       }
     </style>
   </template>
 
   <template id="rating-template">
-    <div clas="rating">
-      <i class="material-icons star">star</i>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <div class="component">
+      <slot name="star" class="star"></slot>
     </div>
+
+    <style>
+      .star {
+        color: #FFC107;
+
+        cursor: pointer;
+      }
+
+      .star--inactive {
+        opacity: .5;
+      }
+    </style>
   </template>
 </body>
 
