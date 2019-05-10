@@ -72,13 +72,11 @@ window.customElements.define(
             let text;
             for (const child of elementClone.childNodes) {
               if (child.nodeName === '#text') {
-                text = child;
+                text = child.textContent;
               }
+              elementClone.removeChild(child);
             }
-            while (elementClone.firstChild) {
-              elementClone.removeChild(elementClone.firstChild);
-            }
-            elementClone.textContent = text.textContent;
+            elementClone.textContent = text;
           });
           component.appendChild(elementClone);
         } else {
