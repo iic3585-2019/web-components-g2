@@ -4,63 +4,41 @@ window.customElements.define(
     constructor() {
       super();
 
-      const element = this.querySelector('*[slot="element"]');
-      this.element = document.importNode(element, true);
-      element.remove();
+      const navbar = this.querySelector('*[slot="navbar"]');
+      const elements = this.querySelectorAll('*[slot="element"]');
+      const childs = {};
+      for (const element of elements) {
+        childs[element.innerText] = this.querySelectorAll(
+          '*[slot="' + element.innerText + '"]'
+        );
+      }
+      this.navbar = document.importNode(navbar, true);
+      navbar.remove();
+      this.elements = elements;
+      this.childs = childs;
 
       this.attachShadow({ mode: 'open' });
       this.render();
     }
-
-    get maxValue() {
-      return this.getAttribute('max-value');
-    }
-
-    set maxValue(newMaxValue) {
-      this.setAttribute('max-value', newMaxValue);
-
-      this.render();
-    }
-
-    create(props) {
+    create() {
       const template = document.getElementById('narvar-template');
       const clone = document.importNode(template.content, true);
       const component = clone.querySelector('.component');
-      const elements = ['Home', 'Dormitorio', 'Muebles', 'Mujer', 'Tecnologia'];
-      const childs = {
-        Home: [],
-        Dormitorio: ['Salas de estar', 'Camas', 'Sillones'],
-        Muebles: ['Comedor', 'Escritorios'],
-        Mujer: ['Vestidos', 'Maquillajes', 'Perfumes'],
-        Tecnologia: ['Videojuegos', 'Computadores', 'Camaras'],
-      };
-
-      for (let i = 0; i < props.maxValue; i++) {
-        if (i < elements.length) {
-          const elementClone = document.importNode(this.element, true);
-          elementClone.classList.add('element');
-          elementClone.textContent = elements[i];
-          elementClone.addEventListener('mouseover', () => {
-            for (const keys in childs) {
-              if (keys === elementClone.textContent) {
-                for (const child of childs[keys]) {
-                  const childElementClone = document.importNode(
-                    this.element,
-                    true
-                  );
-                  childElementClone.classList.add('child');
-                  childElementClone.textContent = child;
-                  elementClone.appendChild(childElementClone);
-                }
+      for (const element of this.elements) {
+        element.classList.add('element');
+        element.addEventListener('mouseover', () => {
+          for (const keys in this.childs) {
+            if (keys === element.innerText) {
+              for (const child of this.childs[keys]) {
+                child.classList.add('child');
+                element.appendChild(child);
               }
             }
-          });
-          this.element.appendChild(elementClone);
-        } else {
-          break;
-        }
+          }
+        });
+        this.navbar.appendChild(element);
       }
-      component.appendChild(this.element);
+      component.appendChild(this.navbar);
       return clone;
     }
 
@@ -68,11 +46,7 @@ window.customElements.define(
       const component = this.shadowRoot.querySelector('.component');
       if (component) this.shadowRoot.removeChild(component);
 
-      this.shadowRoot.appendChild(
-        this.create({
-          maxValue: Number(this.maxValue),
-        })
-      );
+      this.shadowRoot.appendChild(this.create());
     }
   }
 );
