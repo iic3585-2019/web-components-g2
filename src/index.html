@@ -153,26 +153,29 @@
     </div>
 
     <style>
-
       .element {
         display: inline-block;
         padding: 30px;
         background-color: lightblue;
       }
 
-      .element-press {
+      .element:hover {
         display: inline-block;
         padding: 30px;
         background-color: silver;
       }
 
       .child {
-        width: 100px;
+        display: none;
+      }
+
+      .element:hover .child{
+        display: block;
         padding: 30px;
         background-color: lightblue;
       }
 
-      .child-press {
+      .element:hover .child:hover {
         padding: 30px;
         background-color: silver;
       }

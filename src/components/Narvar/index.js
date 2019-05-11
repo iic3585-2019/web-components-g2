@@ -41,8 +41,6 @@ window.customElements.define(
           elementClone.classList.add('element');
           elementClone.textContent = elements[i];
           elementClone.addEventListener('mouseover', () => {
-            elementClone.classList.remove('element');
-            elementClone.classList.add('element-press');
             for (const keys in childs) {
               if (keys === elementClone.textContent) {
                 for (const child of childs[keys]) {
@@ -52,37 +50,17 @@ window.customElements.define(
                   );
                   childElementClone.classList.add('child');
                   childElementClone.textContent = child;
-                  childElementClone.addEventListener('mouseover', () => {
-                    childElementClone.classList.remove('child');
-                    childElementClone.classList.add('child-press');
-                  });
-                  childElementClone.addEventListener('mouseout', () => {
-                    childElementClone.classList.remove('child-press');
-                    childElementClone.classList.add('child');
-                  });
                   elementClone.appendChild(childElementClone);
                 }
               }
             }
           });
-          elementClone.addEventListener('mouseout', () => {
-            elementClone.classList.remove('element-press');
-            elementClone.classList.add('element');
-
-            let text;
-            for (const child of elementClone.childNodes) {
-              if (child.nodeName === '#text') {
-                text = child.textContent;
-              }
-              elementClone.removeChild(child);
-            }
-            elementClone.textContent = text;
-          });
-          component.appendChild(elementClone);
+          this.element.appendChild(elementClone);
         } else {
           break;
         }
       }
+      component.appendChild(this.element);
       return clone;
     }
 
