@@ -1,3 +1,29 @@
+import { htmlToNode } from '../../helpers.mjs'
+
+const rawTemplate = `
+<template id="rating-template">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <div class="component">
+    <slot name="star" class="star"></slot>
+  </div>
+
+  <style>
+    .star {
+      color: #FFC107;
+
+      cursor: pointer;
+    }
+
+    .star--inactive {
+      opacity: .5;
+    }
+  </style>
+</template>
+`
+
+document.body.appendChild(htmlToNode(rawTemplate))
+
 export default window.customElements.define(
   'app-rating',
   class extends HTMLElement {

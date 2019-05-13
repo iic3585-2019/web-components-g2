@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#application {
+  height: 200vh;
+}
+
+#application > div {
+  height: 100vh;
+}
+
+.component-container {
+  flex: 1;
+
+  text-align: center;
+}
+
+.v-separator {
+  width: 1px;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.14);
+}

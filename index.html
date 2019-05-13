@@ -8,18 +8,21 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <meta name="viewport" content="width=device-width, user-scalable=no" />
 
-  <!-- Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-
   <!-- Components -->
-  <script type="module" src="./assets/javascripts/components/Navbar/index.mjs"></script>
-  <script type="module" src="./assets/javascripts/components/Product/index.mjs"></script>
-  <script type="module" src="./assets/javascripts/components/Rating/index.mjs"></script>
+  <script type="module" src="./components/Navbar/index.mjs"></script>
+  <script type="module" src="./components/Product/index.mjs"></script>
+  <script type="module" src="./components/Rating/index.mjs"></script>
+
+  <!-- Stylesheets -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="./assets/stylesheets/class.css" rel="stylesheet" />
+  <link href="./assets/stylesheets/index.css" rel="stylesheet" />
 </head>
 
 <body>
   <div id="application" class="padding-3">
-    <!-- Navbar component -->
+    <!-- Using <app-navbar> component -->
+
     <app-navbar>
       <img src="assets/images/logo.svg" class="logo" slot="logo">
 
@@ -56,7 +59,8 @@
 
     <div class="d-flex-r d-flex-a-c d-flex-j-sa elevation-1">
       <div class="component-container">
-        <!-- Product component -->
+        <!-- Using <app-product> component -->
+
         <app-product>
           <div slot="discount">38%</div>
 
@@ -75,198 +79,14 @@
       <div class="v-separator"></div>
 
       <div class="component-container">
-        <!-- Rating component -->
+        <!-- Using <app-rating> component -->
+
         <app-rating current-value="3" max-value="5">
           <i slot="star" class="material-icons">star</i>
         </app-rating>
       </div>
     </div>
   </div>
-
-  <template id="navbar-template">
-    <div class="component">
-      <slot name="logo" class="logo"></slot>
-
-      <slot></slot>
-    </div>
-
-    <style>
-      .component {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-
-        display: flex;
-        align-items: center;
-
-        font-family: 'Roboto', sans-serif;
-
-        height: 48px;
-
-        background-color: #FFFFFF;
-        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-      }
-
-      .ghost {
-        height: 48px;
-      }
-
-      ::slotted(.logo) {
-        width: 48px;
-        height: 48px;
-      }
-    </style>
-  </template>
-
-  <template id="tab-template">
-    <div class="component">
-      <div class="text"></div>
-
-      <div class="items">
-        <slot></slot>
-      </div>
-    </div>
-
-    <style>
-      .component {
-        position: relative;
-      }
-
-      .text {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        height: 48px;
-
-        padding-right: 16px;
-        padding-left: 16px;
-      }
-
-      .text.with-uri {
-        cursor: pointer;
-      }
-
-      .text.with-uri:hover {
-        background-color: red;
-      }
-
-      .items {
-        display: none;
-
-        position: absolute;
-        top: 48px;
-        right: 0;
-        left: 0;
-
-        background-color: #FFFFFF;
-        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-      }
-
-      .items.open {
-        display: block;
-      }
-    </style>
-  </template>
-
-  <template id="product-template">
-    <div class="component">
-      <slot name="discount" class="discount"></slot>
-
-      <slot name="image" class="image"></slot>
-
-      <div class="body">
-        <slot name="name" class="name"></slot>
-
-        <slot name="price-credit" class="price price--credit"></slot>
-        <div>
-          Internet: <slot name="price-online" class="price price--online"></slot>
-        </div>
-        <div>
-          Normal: <slot name="price-normal" class="price price--normal"></slot>
-        </div>
-      </div>
-    </div>
-
-    <style>
-      .component {
-        display: inline-flex;
-        flex-direction: column;
-        align-items: center;
-
-        font-family: 'Roboto', sans-serif;
-
-        border-radius: 2px;
-      }
-
-      .discount {
-        align-self: flex-end;
-
-        display: inline-block;
-
-        font-size: 2rem;
-        font-weight: bold;
-        color: #FFFFFF;
-
-        padding: .5rem .75rem;
-
-        background-color: #F44336;
-        border-radius: 2px;
-      }
-
-      ::slotted(.image) {
-        padding: 1rem;
-      }
-
-      .body {
-        padding-right: 1rem;
-        padding-bottom: 1rem;
-        padding-left: 1rem;
-      }
-
-      .name {
-        font-size: 2rem;
-        font-weight: bold;
-      }
-
-      .price--credit {
-        font-size: 2rem;
-        font-weight: bold;
-        color: #2196F3;
-      }
-
-      .price--online {
-        display: inline-block;
-      }
-
-      .price--normal {
-        display: inline-block;
-
-        text-decoration: line-through;
-      }
-    </style>
-  </template>
-
-  <template id="rating-template">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-
-    <div class="component">
-      <slot name="star" class="star"></slot>
-    </div>
-
-    <style>
-      .star {
-        color: #FFC107;
-
-        cursor: pointer;
-      }
-
-      .star--inactive {
-        opacity: .5;
-      }
-    </style>
-  </template>
 </body>
 
 </html>

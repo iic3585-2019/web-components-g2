@@ -1,3 +1,60 @@
+import { htmlToNode } from '../../helpers.mjs'
+
+const rawTemplate = `
+<template id="tab-template">
+  <div class="component">
+    <div class="text"></div>
+
+    <div class="items">
+      <slot></slot>
+    </div>
+  </div>
+
+  <style>
+    .component {
+      position: relative;
+    }
+
+    .text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      height: 48px;
+
+      padding-right: 16px;
+      padding-left: 16px;
+    }
+
+    .text.with-uri {
+      cursor: pointer;
+    }
+
+    .text.with-uri:hover {
+      background-color: red;
+    }
+
+    .items {
+      display: none;
+
+      position: absolute;
+      top: 48px;
+      right: 0;
+      left: 0;
+
+      background-color: #FFFFFF;
+      box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    }
+
+    .items.open {
+      display: block;
+    }
+  </style>
+</template>
+`;
+
+document.body.appendChild(htmlToNode(rawTemplate))
+
 export default window.customElements.define(
   'app-tab',
   class extends HTMLElement {
